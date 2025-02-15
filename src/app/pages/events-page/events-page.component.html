@@ -1,0 +1,46 @@
+<main class="flex flex-col justify-center m-4">
+  <nav class="self-center p-4">
+    <a href="/events" class="md-button">Events</a>
+    <a href="/people" class="md-button">People</a>
+  </nav>
+  <h1 class="text-8xl text-center m-4">Events</h1>
+  <section class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 w-full p-4">
+    <figure class="md-card-outlined h-[448px] flex justify-center items-center relative">
+      <button (click)="addNewItem()" class="md-icon-button-outlined">add</button>
+    </figure>
+    @for (item of items; track $index) {
+      <figure class="md-card-filled h-[448px] flex flex-col relative overflow-auto">
+        @if (item.editing === false) {
+          <button (click)="item.editing = true" class="absolute md-icon-button-filled right-1 top-1 font-material">edit</button>
+          <small class="absolute bottom-3 left-4 text-xs font-semibold">{{ item.startIn | date: "d 'de' MMM 'às' h:mm" }} - {{ item.endsIn | date: "d 'de' MMM 'às' h:mm" }}</small>
+          <img class="rounded-lg min-h-64" [src]="item.imageUrl" alt="Some alt text">
+          <h1 class="text-2xl font-bold py-2 px-4">{{ item.title }}</h1>
+          <figcaption class="text-base px-4 font-semibold max-w-fit text-wrap overflow-y-auto">{{ item.description }}</figcaption>
+        } @else {
+          <button [disabled]="item.description === '' || item.title === '' || item.startIn  === '' || item.endsIn  === ''" (click)="item.editing = false" class="absolute md-icon-button-filled right-1 top-1 font-material">save</button>
+          <img class="rounded-lg" [src]="item.imageUrl" alt="Some alt text">
+          <fieldset class="p-4 flex flex-col gap-4">
+            <div class="md-input-wrapper">
+              <input required [(ngModel)]="item.title" placeholder="" id="email" type="text" class="md-input peer" />
+              <label for="email" class="md-floating-label">Title</label>
+            </div>
+            <div class="md-input-wrapper">
+              <textarea required [(ngModel)]="item.description" placeholder="" id="email" type="text" class="md-input h-24 peer"></textarea>
+              <label for="email" class="md-floating-label">Description</label>
+            </div>
+
+            <div class="md-input-wrapper">
+              <input required [(ngModel)]="item.startIn" placeholder="" id="email" type="datetime-local" class="md-input peer" />
+              <label for="email" class="md-floating-label">Starts In</label>
+            </div>
+
+            <div class="md-input-wrapper">
+              <input required [(ngModel)]="item.endsIn" placeholder="" id="email" type="datetime-local" class="md-input peer" />
+              <label for="email" class="md-floating-label">Ends IN</label>
+            </div>
+          </fieldset>
+        }
+      </figure>
+    }
+  </section>
+</main>
