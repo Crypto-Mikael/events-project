@@ -30,13 +30,12 @@ export class EventsPageComponent implements OnInit {
 
   addNewItem = () => {
     this.items.unshift({
-      title: 'SUPER EVENTO',
-      description:
-        'Um evento muito maneiro cheio de atrações e surpresas. Um evento muito maneiro cheio de atrações e surpresas. Um evento muito maneiro cheio de atrações e surpresas.',
+      title: '',
+      description: '',
       imageUrl:
         'https://redacao.rhpravoce.com.br/wp-content/uploads/2022/10/Brasil-devera-completar-quase-600-mil-eventos-realizados-em-2022-1.png',
-      startIn: '2025-03-15T18:00:00',
-      endsIn: '2025-03-15T23:59:00',
+      startIn: '',
+      endsIn: '',
       editing: true,
     });
   };
