@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { FormLoginComponent, FormRegisterComponent } from '@components/forms';
 import { EventsPageComponent } from './pages/events-page/events-page.component';
-import { PeoplePageComponent } from './pages/people-page/people-page.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
@@ -10,11 +10,8 @@ export const routes: Routes = [
   },
   {
     path: 'events',
+    canActivate: [authGuard],
     loadComponent: () => EventsPageComponent,
-  },
-  {
-    path: 'people',
-    loadComponent: () => PeoplePageComponent,
   },
   {
     path: '',
